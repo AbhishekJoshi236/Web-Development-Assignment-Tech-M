@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #weather-result {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #weather-result h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form id="weather-form">
+            <input type="text" id="city" placeholder="Enter city name" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="weather-result"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#weather-form').submit(function(event) {
+                event.preventDefault(); 
+
+                var city = $('#city').val();
+                var apiKey = '5949d8f11h65m1ui8l4y81gs65v1s65rh1nfy6k1i'; // Replace with your weather API key
+                var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+                $.ajax({
+                    url: apiUrl,
+                    method: 'GET',
+                    success: function(response) {
+                        var weatherInfo = `
+                            <h2>Weather in ${response.name}</h2>
+                            <p>Temperature: ${response.main.temp} °C</p>
+                            <p>Weather: ${response.weather[0].description}</p>
+                            <p>Humidity: ${response.main.humidity}%</p>
+                            <p>Wind Speed: ${response.wind.speed} m/s</p>
+                        `;
+                        $('#weather-result').html(weatherInfo);
+                    },
+                    error: function() {
+                        $('#weather-result').html('<p>City not found. Please try again.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

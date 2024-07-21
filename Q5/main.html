@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box-Sizing Example</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .content-box {
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #000;
+            background-color: #f0a;
+            box-sizing: content-box; 
+        }
+
+        .border-box {
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #000;
+            background-color: #0af;
+            box-sizing: border-box;
+        }
+
+        .content-box,
+        .border-box {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-box">
+            This div uses <strong>content-box</strong> box-sizing. The width specified does not include padding and border.
+        </div>
+        <div class="border-box">
+            This div uses <strong>border-box</strong> box-sizing. The width specified includes padding and border.
+        </div>
+        <div class="content-box">
+            Another div with <strong>content-box</strong> box-sizing.
+        </div>
+        <div class="border-box">
+            Another div with <strong>border-box</strong> box-sizing.
+        </div>
+    </div>
+</body>
+</html>
